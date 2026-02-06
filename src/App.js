@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Authenticator } from "@aws-amplify/ui-react";
+import "@aws-amplify/ui-react/styles.css";
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Authenticator>
+      {({ signOut, user }) => (
+        <div style={{ padding: 24, fontFamily: "system-ui" }}>
+          <h1>Missiva</h1>
+
+          <p>
+            Logado como:{" "}
+            <b>{user?.signInDetails?.loginId || user?.username}</b>
+          </p>
+
+          <button onClick={signOut}>Sair</button>
+
+          <hr style={{ margin: "24px 0" }} />
+
+          <p>✅ Login com Cognito funcionando.</p>
+          <p>Próximo passo: criar e listar missivas.</p>
+        </div>
+      )}
+    </Authenticator>
   );
 }
-
-export default App;
